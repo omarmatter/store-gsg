@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\category;
+use App\Http\Controllers\admin\CategoreisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,12 +19,12 @@ Route::get('/', function () {
 });
 
 // ------------------------- --Route Categorey -----------------------------------
-Route::get('admin/categoreis', [category::class ,'index'])->name('categoreis.index');
-Route::get('admin/categoreis/create', [category::class ,'create'])->name('categoreis.create');
-Route::post('admin/categoreis', [category::class ,'store'])->name('categoreis.stroe');
-Route::get('admin/categoreis/{id}', [category::class ,'show'])->name('categoreis.show');
-Route::get('admin/categoreis/{id}/edit', [category::class ,'edit'])->name('categoreis.edit');
-Route::put('admin/categoreis/{id}', [category::class ,'update'])->name('categoreis.update');
-Route::delete('admin/categoreis/{id}', [category::class ,'destroy'])->name('categoreis.destroy');
+Route::get('admin/categoreis', [CategoreisController::class ,'index'])->name('categories.index');
+Route::get('admin/categoreis/create', [CategoreisController::class ,'create'])->name('categories.create');
+Route::post('admin/categoreis', [CategoreisController::class ,'store'])->name('categories.stroe');
+Route::get('admin/categoreis/{id}', [CategoreisController::class ,'show'])->name('categories.show');
+Route::get('admin/categoreis/{id}/edit', [CategoreisController::class ,'edit'])->name('categories.edit');
+Route::put('admin/categoreis/{id}', [CategoreisController::class ,'update'])->name('categories.update');
+Route::delete('admin/categoreis/{id}', [CategoreisController::class ,'destroy'])->name('categories.destroy');
 
 // ------------------------- End Route Categorey -----------------------------------
