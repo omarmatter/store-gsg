@@ -54,6 +54,13 @@ class CategoreisController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255|min:3|unique:categories',
+            'parent_id' => 'required|int|exists:categories,id',
+            'description' => 'nullable|min:5',
+            'status' => 'required|in:active,draft',
+            'image' => 'image|max:512000|dimensions:min_width=300,min_height=300',
+        ]);
       $category = new Category([
             'name' => $request->post('name'),
             'slug' => Str::slug($request->post('name')),
@@ -110,7 +117,7 @@ class CategoreisController extends Controller
             'slug' => Str::slug($request->name)
         ]);
         $category->update($request->all());
-    
+
     return redirect()->route('categories.index')
     ->with('success', 'Category updated');
 }
