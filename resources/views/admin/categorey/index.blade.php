@@ -6,6 +6,7 @@
 {{ $title }} <a href="{{ route('categories.create') }}">Create</a>
 @endsection
 
+
 @section('breadcrumb')
 <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -14,7 +15,9 @@
 @endsection
 
 @section('content')
-
+<div class="alert alert-success">
+    {{ session()->get('success'); }}
+</div>
 
 
 <table class="table">

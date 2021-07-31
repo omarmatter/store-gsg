@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -25,7 +26,7 @@ class CategoreisController extends Controller
             ->orderBy('categories.name', 'ASC')
             // ->withTrashed()
             ->get();
-            return view('admin.index', [
+            return view('admin.categorey.index', [
                 'categories' => $entries,
                 'title' => 'Categories List'
             ]);
@@ -39,7 +40,10 @@ class CategoreisController extends Controller
      */
     public function create()
     {
-        //
+        $parents = Category::all();
+
+        $category = new category();
+        return view('admin.categorey.create' ,compact('category','parents'));
     }
 
     /**
@@ -50,8 +54,20 @@ class CategoreisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $category = new Category([
+            'name' => $request->post('name'),
+            'slug' => Str::slug($request->post('name')),
+            'parent_id' => $request->post('parent_id'),
+            'description' => $request->post('description'),
+            'status' => $request->post('status', 'active'),
+        ]);
+        $category->save();
+
+        // PRG
+        return redirect()->route('categories.index')
+            ->with('success', 'Category created');
     }
+
 
     /**
      * Display the specified resource.
@@ -61,7 +77,9 @@ class CategoreisController extends Controller
      */
     public function show($id)
     {
-        //
+
+
+
     }
 
     /**
@@ -72,7 +90,9 @@ class CategoreisController extends Controller
      */
     public function edit($id)
     {
-        //
+        $parents = Category::all();
+        $category = category::findOrFail($id);
+        return view('admin.categorey.edit', compact('category','parents'));
     }
 
     /**
@@ -84,8 +104,17 @@ class CategoreisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $category = Category::find($id);
+
+        $request->merge([
+            'slug' => Str::slug($request->name)
+        ]);
+        $category->update($request->all());
+    
+    return redirect()->route('categories.index')
+    ->with('success', 'Category updated');
+}
+
 
     /**
      * Remove the specified resource from storage.
@@ -95,6 +124,7 @@ class CategoreisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        category::destroy($id);
+        return redirect()->route('categories.index');
     }
 }
