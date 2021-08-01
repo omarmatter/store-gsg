@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
 {
@@ -95,7 +96,15 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
+        if($request->hasFile('image')){
+        $file = $request->file('image');
+        $image_path= $file->store('/', 'uplode');
+        $request->merge([
+'image_path' => 'uplode/'.$image_path
+        ]);
+        }
         $product->update($request->all());
+
 
         return redirect()->route('product.index')
             ->with('success', "Product ($product->name) updated.");
@@ -113,7 +122,7 @@ class ProductsController extends Controller
 
         $product->delete();
 
-
+          Storage::disk('uplode')->delete($product->image_pathe);
 
         return redirect()->route('product.index')
             ->with('success', "Product ($product->name) deleted.");

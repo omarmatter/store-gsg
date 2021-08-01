@@ -42,6 +42,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'uplode' => [
+            'driver' => 'local',
+            'root' => public_path('uplode'),
+            'url' => env('APP_URL').'/uplode',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
