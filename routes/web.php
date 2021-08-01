@@ -28,3 +28,8 @@ Route::put('admin/categoreis/{id}', [CategoreisController::class ,'update'])->na
 Route::delete('admin/categoreis/{id}', [CategoreisController::class ,'destroy'])->name('categories.destroy');
 
 // ------------------------- End Route Categorey -----------------------------------
+
+// ----------------------------- Route Product --------------------------------------
+
+Route::resource('admin/product', 'admin\ProductsController');
+//------------------------------ End Route Product -----------------------------------
