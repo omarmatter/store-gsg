@@ -122,7 +122,8 @@ class ProductsController extends Controller
 
         $product->delete();
 
-          Storage::disk('uplode')->delete($product->image_pathe);
+        //   Storage::disk('uplode')->delete($product->image_pathe);
+        unlink(public_path($product->image_path));
 
         return redirect()->route('product.index')
             ->with('success', "Product ($product->name) deleted.");

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\admin\CategoreisController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,21 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('layout.admin.master-layout');
+    return view('welcome');
 });
 
-// ------------------------- --Route Categorey -----------------------------------
-Route::get('admin/categoreis', [CategoreisController::class ,'index'])->name('categories.index');
-Route::get('admin/categoreis/create', [CategoreisController::class ,'create'])->name('categories.create');
-Route::post('admin/categoreis', [CategoreisController::class ,'store'])->name('categories.store');
-Route::get('admin/categoreis/{id}', [CategoreisController::class ,'show'])->name('categories.show');
-Route::get('admin/categoreis/{id}/edit', [CategoreisController::class ,'edit'])->name('categories.edit');
-Route::put('admin/categoreis/{id}', [CategoreisController::class ,'update'])->name('categories.update');
-Route::delete('admin/categoreis/{id}', [CategoreisController::class ,'destroy'])->name('categories.destroy');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-// ------------------------- End Route Categorey -----------------------------------
-
-// ----------------------------- Route Product --------------------------------------
-
-Route::resource('admin/product', 'admin\ProductsController');
-//------------------------------ End Route Product -----------------------------------
+require __DIR__.'/auth.php';
