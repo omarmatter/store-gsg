@@ -83,6 +83,7 @@ class ProductsController extends Controller
 
         return view('admin.product.edit', [
             'product' => $product,
+            'categories' => category::withTrashed()->pluck('name','id')
         ]);
     }
 

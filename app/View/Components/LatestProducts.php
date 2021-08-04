@@ -2,18 +2,21 @@
 
 namespace App\View\Components;
 
+use App\Models\product;
 use Illuminate\View\Component;
 
-class form-input extends Component
+class LatestProducts extends Component
 {
+  public $products;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($count =10)
     {
-        //
+        $this->products = product::latest()
+            ->limit($count)->get();
     }
 
     /**
@@ -23,6 +26,6 @@ class form-input extends Component
      */
     public function render()
     {
-        return view('components.form-input');
+        return view('components.latest-products');
     }
 }

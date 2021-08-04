@@ -16,7 +16,7 @@
     @enderror
 </div>
 <div class="form-group">
-    {{-- <x-form-select name="category_id" label="Category" :options="$categories" :selected="$product->category_id" /> --}}
+    <x-form-select name="category_id" label="Category" :options="$categories" :selected="$product->category_id" />
 </div>
 <div class="form-group">
     <label for="">Description</label>

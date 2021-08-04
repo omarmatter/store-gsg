@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class form-select extends Component
+class StoreFrontLayout extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class form-select extends Component
      */
     public function render()
     {
-        return view('components.form-select');
+        return view('layout.store-front-layout');
     }
 }
