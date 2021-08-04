@@ -14,4 +14,11 @@ class category extends Model
     protected $fillable = [
         'name', 'slug', 'parent_id', 'status', 'description',
     ];
+
+    public function getNameAttribute($value){
+        if($this->trashed()){
+            return $value." (deleted)";
+        }
+        return $value;
+    }
 }

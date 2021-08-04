@@ -28,7 +28,7 @@ class CategoreisController extends Controller
             ->where('categories.status', '=', 'active')
             ->orderBy('categories.created_at', 'DESC')
             ->orderBy('categories.name', 'ASC')
-            // ->withTrashed()
+            ->withTrashed()
             ->get();
             return view('admin.categorey.index', [
                 'categories' => $entries,
@@ -101,7 +101,7 @@ class CategoreisController extends Controller
      */
     public function edit($id)
     {
-        $parents = Category::all();
+        $parents = Category::withTrashed()->get();
         $category = category::findOrFail($id);
         return view('admin.categorey.edit', compact('category','parents'));
     }

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\category;
 use App\Models\product;
+use App\Models\category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
@@ -35,7 +36,7 @@ class ProductsController extends Controller
     public function create()
     {
 
-        $categories = category::all();
+        $categories = category::pluck('name','id');
         return view('admin.product.create', [
             'categories' => $categories,
             'product' => new Product(),
@@ -52,10 +53,12 @@ class ProductsController extends Controller
     {
         $request->validate(Product::validateRules());
 
-
+     $request->merge([
+         'slug'=> Str::slug($request->name)
+     ]);
         $product = Product::create($request->all());
 
-        return redirect()->route('products.index')
+        return redirect()->route('product.index')
             ->with('success', "Product ($product->name) created.");
     }
 

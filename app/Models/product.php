@@ -38,4 +38,18 @@ class product extends Model
         ];
     }
 
+
+    public function getImageUrlAttribute()
+    {
+        if (!$this->image_path) {
+            return asset('assets/img/default-150x150.png');
+        }
+
+        if (stripos($this->image_path, 'http') === 0) {
+            return $this->image_path;
+        }
+
+        return asset(  $this->image_path);
+    }
+
 }

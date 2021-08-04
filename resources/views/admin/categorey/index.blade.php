@@ -44,7 +44,7 @@
         <tr>
             <td>{{ $loop->first? 'First' : ($loop->last? 'Last' : $loop->iteration) }}</td>
             <td>{{ $category->id }}</td>
-            <td>{{ $category->name }}</td>
+            <td>{{ $category->orginal_name }}</td>
             <td>{{ $category->slug }}</td>
             {{-- <td>{{ $category->parent->name}}</td> --}}
             {{-- <td>{{ $category->count }}</td> --}}
