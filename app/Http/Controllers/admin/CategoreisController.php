@@ -14,6 +14,10 @@ class CategoreisController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    function __construct()
+    {
+ $this->middleware(['auth','verified']);
+    }
     public function index()
     {
         $entries = category::leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')

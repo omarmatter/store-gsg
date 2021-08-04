@@ -32,7 +32,7 @@
     <p class="invalid-feedback">{{ $message }}</p>
     @enderror
 </div>
-{{-- <div class="form-group">
+<div class="form-group">
     <x-form-input type="text" name="sku" label="SKU" :value="$product->sku" />
 </div>
 <div class="form-group">
@@ -55,7 +55,7 @@
 </div>
 <div class="form-group">
     <x-form-input type="number" name="length" label="Length" :value="$product->length" />
-</div> --}}
+</div>
 
 <div class="form-group">
     <label for="status">Status</label>
