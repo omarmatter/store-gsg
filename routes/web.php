@@ -39,6 +39,9 @@ Route::delete('admin/categoreis/{id}', [CategoreisController::class ,'destroy'])
 // ------------------------- End Route Categorey -----------------------------------
 
 // ----------------------------- Route Product --------------------------------------
+Route::get('admin/product/trash',[ProductsController::class ,'trash'])->name('products.trash')->middleware('auth');
+Route::put('admin/product/trash/{id?}',[ProductsController::class ,'restore'])->name('products.restore')->middleware('auth');
+Route::delete('admin/product/trash/{id?}',[ProductsController::class ,'ForceDelete'])->name('products.force-delete')->middleware('auth');
 
 Route::resource('admin/product',ProductsController::class)->middleware('auth');
 //------------------------------ End Route Product -----------------------------------

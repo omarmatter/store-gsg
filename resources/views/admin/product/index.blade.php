@@ -7,7 +7,7 @@
         {{-- @can('create', App\Models\Product::class) --}}
         <a class="btn btn-sm btn-outline-primary" href="{{ route('product.create') }}">Create</a>
         {{-- @endcan --}}
-        {{-- <a class="btn btn-sm btn-outline-dark" href="{{ route('products.trash') }}">Trash</a> --}}
+        <a class="btn btn-sm btn-outline-dark" href="{{ route('products.trash') }}">Trash</a>
     </div>
 </div>
 @endsection
