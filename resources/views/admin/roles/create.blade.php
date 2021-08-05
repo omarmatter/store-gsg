@@ -13,7 +13,7 @@
 
 @section('content')
 
-<form action="{{ route('roles.store') }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('role.store') }}" method="post" enctype="multipart/form-data">
     @csrf
 
     @include('admin.roles._form', [

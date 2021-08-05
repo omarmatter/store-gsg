@@ -40,16 +40,16 @@
                 <td>{{ $role->created_at }}</td>
                 <td>
                     {{-- @can('roles.update') --}}
-                    <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-sm btn-dark">Edit</a></td>
+                    <a href="{{ route('role.edit', $role->id) }}" class="btn btn-sm btn-dark">Edit</a></td>
                     {{-- @endcan --}}
                 <td>
-                @if (Auth::user()->can('roles.delete'))
-                <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                {{-- @if (Auth::user()->can('role.delete')) --}}
+                <form action="{{ route('role.destroy', $role->id) }}" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                 </form>
-                @endif
+                {{-- @endif --}}
                 </td>
             </tr>
             @endforeach

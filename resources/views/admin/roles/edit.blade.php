@@ -13,7 +13,7 @@
 
 @section('content')
 
-<form action="{{ route('roles.update', $role->id) }}" method="post" enctype="multipart/form-data">
+<form action="{{ route('role.update', $role->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
 

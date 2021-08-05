@@ -11,4 +11,8 @@ class Role extends Model
     protected $fillable = [
         'name', 'abilities',
     ];
+
+    protected $casts=[
+            'abilities' => 'json'
+    ];
 }

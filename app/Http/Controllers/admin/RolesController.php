@@ -25,7 +25,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-        Gate::authorize('roles.create');
+        // Gate::authorize('roles.create');
         return view('admin.roles.create', [
             'role' => new Role(),
         ]);
@@ -39,7 +39,7 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        Gate::authorize('roles.create');
+        // Gate::authorize('roles.create');
         $request->validate([
             'name' => 'required',
             'abilities' => 'required|array',
@@ -49,7 +49,7 @@ class RolesController extends Controller
 
         $role = Role::create($request->all());
 
-        return redirect()->route('roles.index')->with('success', 'Role added');
+        return redirect()->route('role.index')->with('success', 'Role added');
     }
 
     /**
@@ -72,7 +72,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        Gate::authorize('roles.update');
+        // Gate::authorize('roles.update');
         $role = Role::findOrFail($id);
 
         return view('admin.roles.edit', compact('role'));
@@ -87,7 +87,7 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Gate::authorize('roles.update');
+        // Gate::authorize('roles.update');
         $request->validate([
             'name' => 'required',
             'abilities' => 'required|array',
@@ -96,7 +96,7 @@ class RolesController extends Controller
         $role = Role::findOrFail($id);
         $role->update($request->all());
 
-        return redirect()->route('roles.index')->with('success', 'Role updated');
+        return redirect()->route('role.index')->with('success', 'Role updated');
     }
 
     /**
@@ -107,11 +107,11 @@ class RolesController extends Controller
      */
     public function destroy($id)
     {
-        Gate::authorize('roles.delete');
+        // Gate::authorize('roles.delete');
 
         $role = Role::findOrFail($id);
         $role->delete();
 
-        return redirect()->route('roles.index')->with('success', 'Role deleted');
+        return redirect()->route('role.index')->with('success', 'Role deleted');
     }
 }
