@@ -19,7 +19,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products =product::     //withoutGlobalScopes([new activestutasscop])
+        $products =product::active()->     //withoutGlobalScopes([new activestutasscop])
         join('categories', 'categories.id', '=', 'products.category_id')
         ->select([
             'products.*',
