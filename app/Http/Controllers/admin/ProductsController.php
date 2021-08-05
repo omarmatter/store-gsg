@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Scopse\activestutasscop;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
@@ -19,6 +20,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
+        Gate::authorize('product.create');
+        // if(!Gate::allows('product.create')){
+        // abort(401);
+        // }
         $products =product::active()->     //withoutGlobalScopes([new activestutasscop])
         join('categories', 'categories.id', '=', 'products.category_id')
         ->select([
