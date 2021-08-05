@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Scopse\activestutasscop;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,6 +20,14 @@ class product extends Model
         'quantity', 'weight', 'width', 'height', 'length', 'status',
         'category_id',
     ];
+
+    protected static function booted(){
+
+        static::addGlobalScope(new activestutasscop());
+
+            }
+
+
 
     public static function validateRules()
     {

@@ -7,6 +7,7 @@ use App\Models\category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Scopse\activestutasscop;
 use Illuminate\Support\Facades\Storage;
 
 class ProductsController extends Controller
@@ -18,11 +19,13 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products =product::join('categories', 'categories.id', '=', 'products.category_id')
+        $products =product::     //withoutGlobalScopes([new activestutasscop])
+        join('categories', 'categories.id', '=', 'products.category_id')
         ->select([
             'products.*',
             'categories.name as category_name',
         ])
+
         ->paginate(15);
 
         return view('admin.product.index' ,compact('products'));
