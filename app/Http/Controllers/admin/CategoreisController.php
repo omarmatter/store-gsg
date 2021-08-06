@@ -20,16 +20,20 @@ class CategoreisController extends Controller
     }
     public function index()
     {
-        $entries = category::leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')
-            ->select([
-                'categories.*',
-                'parents.name as parent_name'
-            ])
-            ->where('categories.status', '=', 'active')
-            ->orderBy('categories.created_at', 'DESC')
-            ->orderBy('categories.name', 'ASC')
-            ->withTrashed()
-            ->get();
+        // $entries = category::leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')
+        //     ->select([
+        //         'categories.*',
+        //         'parents.name as parent_name'
+        //     ])
+        //     ->where('categories.status', '=', 'active')
+        //     ->orderBy('categories.created_at', 'DESC')
+        //     ->orderBy('categories.name', 'ASC')
+        //     ->withTrashed()
+        //     ->get();
+
+        $entries = Category::with('parent')
+            ->withCount('products as count')->get();
+
             return view('admin.categorey.index', [
                 'categories' => $entries,
                 'title' => 'Categories List'
@@ -86,10 +90,15 @@ class CategoreisController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(category $categorey)
     {
 
-
+return $categorey->load([
+            'parent',
+            'products' => function($query) {
+                $query->orderBy('price', 'ASC')->where('status', 'active');
+            }
+        ]);
 
     }
 

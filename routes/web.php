@@ -32,7 +32,7 @@ Route::get('/dashboard', function () {
 Route::get('admin/categoreis',[CategoreisController::class ,'index'])->name('categories.index')->middleware('verified');
 Route::get('admin/categoreis/create', [CategoreisController::class ,'create'])->name('categories.create');
 Route::post('admin/categoreis', [CategoreisController::class ,'store'])->name('categories.store');
-Route::get('admin/categoreis/{id}', [CategoreisController::class ,' '])->name('categories.show');
+Route::get('admin/categoreis/{categorey}', [CategoreisController::class ,'show'])->name('categories.show');
 Route::get('admin/categoreis/{id}/edit', [CategoreisController::class ,'edit'])->name('categories.edit');
 Route::put('admin/categoreis/{id}', [CategoreisController::class ,'update'])->name('categories.update');
 Route::delete('admin/categoreis/{id}', [CategoreisController::class ,'destroy'])->name('categories.destroy');
