@@ -25,10 +25,11 @@ class ProductsController extends Controller
         // abort(401);
         // }
         $products =product::active()->     //withoutGlobalScopes([new activestutasscop])
-        join('categories', 'categories.id', '=', 'products.category_id')
+        // join('categories', 'categories.id', '=', 'products.category_id')
+        with('category.parent')
         ->select([
             'products.*',
-            'categories.name as category_name',
+            // 'categories.name as category_name',
         ])
 
         ->paginate(15);
