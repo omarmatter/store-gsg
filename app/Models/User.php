@@ -48,7 +48,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $roles = Role::whereRaw('roles.id IN (SELECT role_id FROM role_user WHERE user_id = ?)', [
             $this->id,
         ])->get();
-        
+
         foreach ($roles as $role) {
             if (in_array($ability, $role->abilities)) {
                 return true;
@@ -58,5 +58,27 @@ class User extends Authenticatable implements MustVerifyEmail
         return false;
     }
 
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class, 'user_id', 'id')->withDefault([
+            'address' => 'Not Entered',
+        ]);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id', 'id', 'id');
+    }
+
+    // public function country()
+    // {
+    //     return $this->belongsTo(Country::class)->withDefault();
+    // }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 
 }

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class profile extends Model
 {
     use HasFactory;
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    // public function ratings()
+    // {
+    //     return $this->morphMany(Rating::class, 'rateable', 'rateable_type', 'rateable_id', 'id');
+    // }
 }
