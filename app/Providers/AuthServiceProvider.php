@@ -14,7 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\product' => 'App\Policies\ProductPolicy',
     ];
 
     /**
@@ -26,27 +26,36 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::before(function($user,$ability){
+         if($user->type =='super-admin'){
+             return true ;
+
+         }elseif($user->type=='user');
+         return false ;
+        });
+
     //   Gate::define('product.create' ,function($user){
     //         return true;
 
 
     //   });
-    foreach(config('abilities') as $key => $value){
-          Gate::define($key ,function($user) use($key) {
+//     foreach(config('abilities') as $key => $value){
+//           Gate::define($key ,function($user) use($key) {
 
-        $roles = Role::whereRaw('roles.id in(Select role_id from role_user where user_id =?)',[
-$user->id
-])->get();
-        foreach($roles as $role){
-
-            if(in_array($key ,$role->abilitie)){
-                return true;
-            }
-        }
+//         $roles = Role::whereRaw('roles.id in(Select role_id from role_user where user_id =?)',[
+// $user->id
+// ])->get();
 
 
-});
+//         foreach($roles as $role){
+//             if(in_array($key ,$role->abilities)){
+//                 return true;
+//             }
+//         }
 
-}
+
+// });
+
+// }
     }
 }

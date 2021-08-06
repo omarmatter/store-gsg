@@ -20,7 +20,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        Gate::authorize('product.create');
+      $this->authorize('viewAny');
         // if(!Gate::allows('product.create')){
         // abort(401);
         // }
@@ -43,6 +43,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create');
 
         $categories = category::pluck('name','id');
         return view('admin.product.create', [
@@ -59,6 +60,8 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->authorize('create');
         $request->validate(Product::validateRules());
 
      $request->merge([

@@ -44,11 +44,17 @@
                     {{-- @endcan --}}
                 <td>
                 {{-- @if (Auth::user()->can('role.delete')) --}}
+                @can('roles.delete')
                 <form action="{{ route('role.destroy', $role->id) }}" method="post">
                     @csrf
                     @method('delete')
+
+
+
                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+
                 </form>
+                @endcan
                 {{-- @endif --}}
                 </td>
             </tr>
