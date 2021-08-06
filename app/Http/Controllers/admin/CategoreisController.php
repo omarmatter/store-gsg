@@ -32,7 +32,13 @@ class CategoreisController extends Controller
         //     ->get();
 
         $entries = Category::with('parent')
-            ->withCount('products as count')->get();
+            ->withCount('products as count')
+            // ->whereHas('products',function($query){
+            //     $query->where('status','active');
+            // })
+            // ->has('products')
+            // ->doesntHave('products')
+            ->get();
 
             return view('admin.categorey.index', [
                 'categories' => $entries,

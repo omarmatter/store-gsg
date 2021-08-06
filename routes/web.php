@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\CategoreisController;
+use App\Http\Controllers\admin\Countryontroller;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\RolesController;
 use App\Models\category;
@@ -47,5 +48,6 @@ Route::delete('admin/product/trash/{id?}',[ProductsController::class ,'ForceDele
 Route::resource('admin/product',ProductsController::class)->middleware('auth');
 //------------------------------ End Route Product -----------------------------------
 Route::resource('admin/role',RolesController::class)->middleware('auth');
+Route::resource('admin/country',Countryontroller::class)->middleware('auth');
 
 require __DIR__.'/auth.php';
