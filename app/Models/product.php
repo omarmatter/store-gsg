@@ -78,10 +78,10 @@ $builder->where('products.status','=','active');
             ->withDefault();
     }
 
-    // public function ratings()
-    // {
-    //     return $this->morphMany(Rating::class, 'rateable', 'rateable_type', 'rateable_id', 'id');
-    // }
+    public function ratings()
+    {
+        return $this->morphMany(Rating::class, 'rateable', 'rateable_type', 'rateable_id', 'id');
+    }
 
-    
+
 }
