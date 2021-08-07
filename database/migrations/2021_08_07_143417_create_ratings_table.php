@@ -15,6 +15,11 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->morphs('rateable'); // rateable_id Bigin unsigned   , rateable_type Varchar
+
+            $table->enum('rating' ,[1,2,3,4,5]);
+
             $table->timestamps();
         });
     }
