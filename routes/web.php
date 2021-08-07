@@ -4,7 +4,9 @@ use App\Http\Controllers\admin\CategoreisController;
 use App\Http\Controllers\admin\Countryontroller;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\RolesController;
+use App\Http\Controllers\RateingController;
 use App\Models\category;
+use App\Models\Rating;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,5 +51,5 @@ Route::resource('admin/product',ProductsController::class)->middleware('auth');
 //------------------------------ End Route Product -----------------------------------
 Route::resource('admin/role',RolesController::class)->middleware('auth');
 Route::resource('admin/country',Countryontroller::class)->middleware('auth');
-
+Route::post('rateing', [RateingController::class ,'store']);
 require __DIR__.'/auth.php';

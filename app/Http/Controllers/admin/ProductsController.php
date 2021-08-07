@@ -32,7 +32,9 @@ class ProductsController extends Controller
             // 'categories.name as category_name',
         ])
 
+
         ->paginate(15);
+        
 
         return view('admin.product.index' ,compact('products'));
     }
