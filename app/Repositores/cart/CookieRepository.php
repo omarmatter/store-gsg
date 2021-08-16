@@ -16,11 +16,11 @@ class CookieRepository implements CartRepository{
       $items =$this->all();
       $items[]=$item;
 
-      Cookie::queue($this->name);
+      Cookie::queue($this->name ,$items ,60 * 24* 30 ); // 60 * 24* 30  The  time for Expired = 1 month
     }
     public function clear()
     {
-    Cookie::forget($this->name);
+    Cookie::queue($this->name ,'', -60 );
     }
 
     }
