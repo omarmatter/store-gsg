@@ -172,7 +172,7 @@
               <button><i class="ps-icon-search"></i></button>
             </form>
 
-            {{-- <x-cart-menu /> --}}
+            <x-cart-menu />
             <div class="menu-toggle"><span></span></div>
           </div>
         </div>

@@ -28,6 +28,11 @@ class product extends Model
 
             }
 
+            protected $appends = [
+                'image_url',
+                'permalink',
+            ];
+
             public function scopeActive(Builder $builder){
 $builder->where('products.status','=','active');
             }
@@ -66,6 +71,12 @@ $builder->where('products.status','=','active');
 
         return asset(  $this->image_path);
     }
+
+    public function getPermalinkAttribute()
+    {
+        return route('products.detailes', $this->slug);
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id')

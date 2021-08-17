@@ -62,5 +62,10 @@ public function total()
             return $item->quantity * $item->product->price;
         });
     }
+    public function quantity()
+    {
+        $items = $this->all();
+        return $items->sum('quantity');
+    }
 }
 
