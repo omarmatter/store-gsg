@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\CategoreisController;
 use App\Http\Controllers\admin\Countryontroller;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\RolesController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\RateingController;
 use App\Models\category;
 use App\Models\Rating;
@@ -52,4 +53,8 @@ Route::resource('admin/product',ProductsController::class)->middleware('auth');
 Route::resource('admin/role',RolesController::class)->middleware('auth');
 Route::resource('admin/country',Countryontroller::class)->middleware('auth');
 Route::post('rateing', [RateingController::class ,'store']);
+
+Route::get('/cart',[CartController::class,'index'])->name('cart');
+Route::post('/cart',[CartController::class,'store'])->name('cart');
+
 require __DIR__.'/auth.php';

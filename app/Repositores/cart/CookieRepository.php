@@ -8,7 +8,11 @@ class CookieRepository implements CartRepository{
     protected $name = 'cart';
     public function all(){
 
-        return Cookie::get($this->name);
+     $items=  Cookie::get($this->name);
+     if($items){
+         return unserialize($items);
+     }
+     return [];
 
     }
     public function add($item)
@@ -16,7 +20,7 @@ class CookieRepository implements CartRepository{
       $items =$this->all();
       $items[]=$item;
 
-      Cookie::queue($this->name ,$items ,60 * 24* 30 ); // 60 * 24* 30  The  time for Expired = 1 month
+      Cookie::queue($this->name ,serialize( $items ) ,60 * 24* 30 ); // 60 * 24* 30  The  time for Expired = 1 month
     }
     public function clear()
     {
