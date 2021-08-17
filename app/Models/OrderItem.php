@@ -11,6 +11,12 @@ class OrderItem extends Pivot
     use HasFactory;
 public $timestamps=false;
 
+public function order(){
+    return $this->belongsTo(Order::class);
+}
+public function product(){
+    return $this->belongsTo(product::class);
+}
 
 }
 

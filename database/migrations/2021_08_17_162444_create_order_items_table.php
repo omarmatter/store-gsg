@@ -14,8 +14,8 @@ class CreateOrderItemsTable extends Migration
     public function up()
     {
         Schema::create('order_items', function (Blueprint $table) {
-            $table->foreignId('prder_id')->constrained('orders')->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('product')->restrictOnDelete();
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->restrictOnDelete();
             $table->unsignedInteger('quantity')->default(1);
             $table->unsignedFloat('price');
 
