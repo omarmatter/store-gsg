@@ -34,7 +34,7 @@ class ProductsController extends Controller
 
 
         ->paginate(15);
-        
+
 
         return view('admin.product.index' ,compact('products'));
     }
@@ -84,7 +84,7 @@ class ProductsController extends Controller
      */
     public function show($id)
     {
-
+ 
     }
 
     /**

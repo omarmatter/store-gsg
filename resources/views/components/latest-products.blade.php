@@ -4,7 +4,7 @@
         @foreach ($products as $product)
         <div class="grid-item kids">
             <div class="grid-item__content-wrapper">
-               <x-product-item :product="$product"></x-product-item>
+                <x-product-item :product="$product" />
             </div>
         </div>
         @endforeach

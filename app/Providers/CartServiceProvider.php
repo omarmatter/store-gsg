@@ -17,7 +17,7 @@ class CartServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(CartRepository::class, function($app) {
+        $this->app->bind(CartRepository::class, function($app) {
          return  new DatabaseRepository();
         });
     }

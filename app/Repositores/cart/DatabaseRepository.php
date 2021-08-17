@@ -7,23 +7,37 @@ use App\Models\product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseRepository implements CartRepository{
 
-public function all(){
-    return Cart::where('cookie_id',$this->getCookieId())
-    ->orWhere('user_id',Auth::user()->id)->get();
+    protected $items;
 
-}
+    public function __construct()
+    {
+        $this->items = collect([]);
+    }
+
+    public function all()
+    {
+        if (!$this->items->count()) {
+            $this->items = Cart::where('cookie_id', $this->getCookieId())
+                ->orWhere('user_id', Auth::id())
+                ->get();
+        }
+
+        return $this->items;
+    }
 public function add($item ,$qty=1)
 {
-Cart::create([
-    'id'=>Str::uuid() ,
-    'cookie_id'=>$this->getCookieId() ,
-    'product'=>($item instanceof product ) ? $item->id : $item ,
-    'user_id' => Auth::user()->id,
-    'quantity' => $qty
-]);
+    $cart = Cart::updateOrCreate([
+        'cookie_id' => $this->getCookieId(),
+        'product_id' => ($item instanceof Product)? $item->id : $item,
+    ], [
+        //'user_id' => Auth::id(),
+        // quantity = quantity + 2
+        'quantity' => DB::raw('quantity + ' . $qty),
+    ]);
 }
 public function clear()
 {
@@ -41,6 +55,12 @@ if(!$id){
 }
 return $id;
 }
-
+public function total()
+    {
+        $items = $this->all();
+        return $items->sum(function ($item) {
+            return $item->quantity * $item->product->price;
+        });
+    }
 }
 
