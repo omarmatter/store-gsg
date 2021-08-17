@@ -11,7 +11,7 @@ public function all(){
     return Session::get($this->key);
 
 }
-public function add($item)
+public function add($item ,$qty=1)
 {
     return Session::push($this->key, $item);
 }

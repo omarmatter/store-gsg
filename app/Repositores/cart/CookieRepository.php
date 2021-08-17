@@ -15,7 +15,7 @@ class CookieRepository implements CartRepository{
      return [];
 
     }
-    public function add($item)
+    public function add($item ,$qty=1)
     {
       $items =$this->all();
       $items[]=$item;
