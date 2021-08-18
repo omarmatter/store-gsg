@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderCreated;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,20 +38,23 @@ class CheckoutController extends Controller
         'billing_country'=>'required',
 
         ]);
-
         DB::beginTransaction();
            try{
+            $request->merge([
+                'total' => $this->cart->total(),
+            ]);
        $order= Order::create($request->all());
 
-       foreach ($this->cart()->all() as $item) {
+       foreach ($this->cart->all() as $item) {
 
            $order->items()->create([
             'product_id'=> $item->product_id ,
-            'quantity'=>$item->quntity ,
+            'quantity'=>$item->quantity ,
             'price'=> $item->product->price,
 
            ]);
            DB::commit();
+           event(new OrderCreated($order));
            return redirect()->route('orders')->with('success','Order Create');
        }
 

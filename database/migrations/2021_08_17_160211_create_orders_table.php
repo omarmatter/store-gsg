@@ -23,12 +23,12 @@ class CreateOrdersTable extends Migration
             $table->unsignedFloat('total')->default(0);
             $table->enum('stutas',['pending','cancelled','processing','shipped','completed'])->default('pending');
             $table->enum('payment_status',['unpaid','paid']);
-            $table->string('shiping_name');
-            $table->string('shiping_email');
-            $table->string('shiping_phone');
-            $table->string('shiping_address');
-            $table->string('shiping_city');
-            $table->string('shiping_country');
+            $table->string('shipping_name');
+            $table->string('shipping_email');
+            $table->string('shipping_phone');
+            $table->string('shipping_address');
+            $table->string('shipping_city');
+            $table->string('shipping_country');
 
 
 

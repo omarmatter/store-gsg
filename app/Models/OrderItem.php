@@ -10,6 +10,7 @@ class OrderItem extends Pivot
 {
     use HasFactory;
 public $timestamps=false;
+public $table='order_items';
 
 public function order(){
     return $this->belongsTo(Order::class);
