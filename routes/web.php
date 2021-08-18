@@ -5,9 +5,11 @@ use App\Http\Controllers\admin\Countryontroller;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\RolesController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RateingController;
 use App\Models\category;
+use App\Models\Order;
 use App\Models\Rating;
 use Illuminate\Support\Facades\Route;
 
@@ -60,5 +62,12 @@ Route::get('product/{slug}','ProductController@show')->name('products.detailes')
 
 Route::get('/cart',[CartController::class,'index'])->name('cart');
 Route::post('/cart',[CartController::class,'store'])->name('cart');
+
+
+Route::get('checkout',[CheckoutController::class ,'create'])->name('checkout');
+Route::post('checkout',[CheckoutController::class ,'store']);
+Route::get('/orders', function () {
+return Order::all();
+})->name('orders');
 
 require __DIR__.'/auth.php';

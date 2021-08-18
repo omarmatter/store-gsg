@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Repositores\cart\CartRepository;
+use Symfony\Component\Intl\Countries;
 use Throwable;
 
 class CheckoutController extends Controller
@@ -21,6 +22,7 @@ class CheckoutController extends Controller
         return view('front.checkout',[
             'cart'=>$this->cart ,
             'user'=>Auth::user(),
+            'countries'=>Countries::getNames()
 
         ]);
     }

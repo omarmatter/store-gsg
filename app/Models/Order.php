@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Observers\OrderObserver;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,6 +38,12 @@ class Order extends Model
         'billing_country',
         'notes'
     ];
+
+    public static  function booted(){
+
+    static::observe(OrderObserver::class);
+
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
