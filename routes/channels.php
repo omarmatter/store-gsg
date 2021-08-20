@@ -24,3 +24,7 @@ if ( $user->type=='super-admin'|| $user->type == 'admin'){
 }
 return false;
 });
+
+Broadcast::channel('chat', function($user){
+return $user;
+});
