@@ -8,14 +8,27 @@ use Illuminate\Support\Facades\Auth;
 
 class MessagesController extends Controller
 {
-    public function store(Request $request){
-$request->validate([
-    'message'=>'required'
-]);
 
-broadcast(new MessageSent($request->messagem,Auth::user()));
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
-return ;
+    public function index()
+    {
+        return view('chat');
+    }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'message' => 'required',
+        ]);
+
+        // Save message in database
+
+        broadcast(new MessageSent($request->message, Auth::user()));
+
+        return;
     }
 }

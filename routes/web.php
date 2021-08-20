@@ -6,12 +6,14 @@ use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\RolesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\MessagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RateingController;
 use App\Models\category;
 use App\Models\Order;
 use App\Models\Rating;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Translation\MessageCatalogue;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,5 +71,10 @@ Route::post('checkout',[CheckoutController::class ,'store']);
 Route::get('/orders', function () {
 return Order::all();
 })->name('orders');
+
+
+
+Route::get('chat' ,[MessagesController::class,'index'])->name('chat');
+Route::post('chat' ,[MessagesController::class,'store'])->name('chat');
 
 require __DIR__.'/auth.php';

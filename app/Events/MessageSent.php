@@ -10,22 +10,23 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent
+class MessageSent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels ,ShouldBroadcast;
+    use Dispatchable, InteractsWithSockets, SerializesModels ;
 
-public $message ;
-public $sendar;
+    public $message;
+
+    public $sender;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($message,$sendar)
+    public function __construct($message, $sender)
     {
-        $this->message=$message ;
-        $this->sendar=$sendar;
+        $this->message = $message;
+        $this->sender = $sender;
     }
 
     /**
@@ -38,5 +39,4 @@ public $sendar;
         return new PresenceChannel('chat');
     }
 
-    
 }
