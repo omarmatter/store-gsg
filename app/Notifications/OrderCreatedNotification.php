@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
+use Illuminate\Support\Carbon;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -70,7 +71,8 @@ class OrderCreatedNotification extends Notification
         'title'=>'New order ',
         'body'=> 'A new order has been created (order #:)' .$this->ordar->number ,
         'icon'=>'',
-        'url'=>url('/')
+        'url'=>url('/'),
+        'time' => Carbon::now()->diffForHumans(),
 
     ];
     }

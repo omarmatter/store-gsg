@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\CategoreisController;
 use App\Http\Controllers\admin\Countryontroller;
 use App\Http\Controllers\admin\ProductsController;
 use App\Http\Controllers\admin\RolesController;
+use App\Http\Controllers\AdminNotificationController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\MessagesController;
@@ -30,8 +31,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('notifications/{id}',[])->name('notification');
-Route::get('notifications',[])->name('notification');
+Route::get('notifications/{id}',[AdminNotificationController::class,'show'])->name('notification.read');
+Route::get('notifications',[AdminNotificationController::class,'index'])->name('notification');
 
 
 Route::get('/dashboard', function () {
