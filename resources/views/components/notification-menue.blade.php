@@ -8,7 +8,7 @@
         <div class="dropdown-divider"></div>
         <div id="notifications">
             @foreach ($notifications as $notification)
-            <a href="{{ route('notifications.read', $notification->id) }}" class="dropdown-item">
+            <a href="{{ route('notification.read', $notification->id) }}" class="dropdown-item">
                 <i class="fas fa-envelope mr-2"></i>
                 @if ($notification->unread()) <b>*</b> @endif
                 {{ $notification->data['title'] }}
