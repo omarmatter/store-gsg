@@ -35,6 +35,20 @@ class OrderCreated implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('orders.'.$this->order->id);
+        return new PrivateChannel('orders');
+    }
+
+  //This function for custom send Date for chanel without this fuction will send all data fo chanel
+
+     public function broadcastWith(){
+        return [
+          'order'=>[
+            'id'=>$this->order->id ,
+            'number'=>$this->order->number
+          ]
+        ];
+    }
+    public function broadcastAs(){ //This function for change name defulte chanel
+        return 'order.created';
     }
 }
