@@ -30,6 +30,10 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('notifications/{id}',[])->name('notification');
+Route::get('notifications',[])->name('notification');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth' ,'verified'])->name('dashboard');
