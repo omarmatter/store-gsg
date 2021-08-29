@@ -5,9 +5,11 @@ namespace App\Notifications;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Support\Carbon;
+use Nexmo\Laravel\Facade\Nexmo;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Messages\NexmoMessage;
 
 class OrderCreatedNotification extends Notification
 {
@@ -54,6 +56,12 @@ class OrderCreatedNotification extends Notification
                     ->view('Mails.invoice',[
                         'order'=>$this->ordar
                     ]);
+
+    }
+    public function toNexmo($notifiable){
+        $message= new NexmoMessage();
+        $message->content('new Order'.$this->ordar->number);
+        return $message;
 
     }
 
