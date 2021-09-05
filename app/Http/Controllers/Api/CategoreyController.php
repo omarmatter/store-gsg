@@ -14,13 +14,15 @@ class CategoreyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {  $categories = category::with('parent')
-        ->when($request->query('parent_id'), function($query, $value) {
-            $query->where('parent_id', '=', $value);
-        })
-        ->paginate();
-        return response()->json($categories)->status(200);
+    public function index(Request $request){
+    // {  $categories = category::with('parent')
+    //     ->when($request->query('parent_id'), function($query, $value) {
+    //         $query->where('parent_id', '=', $value);
+    //     })
+    //     ->paginate();
+    //     return response()->json($categories)->status(200);
+    return category::all();
+
     }
 
     /**
