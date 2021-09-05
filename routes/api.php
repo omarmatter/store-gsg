@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+    Route::post('auth/tokens', [AccessTokensController::class, 'store']);
 
 
     Route::apiResource('categories', 'Api\CategoreyController');
