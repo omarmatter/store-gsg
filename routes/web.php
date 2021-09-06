@@ -37,7 +37,7 @@ Route::get('notifications',[AdminNotificationController::class,'index'])->name('
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth:admin' ,'verified'])->name('dashboard');
+})->middleware(['auth' ,'verified'])->name('dashboard');
 // Route::get('/', function () {
 //     return view('layout.admin.master-layout');
 // });
@@ -82,4 +82,4 @@ return Order::all();
 Route::get('chat' ,[MessagesController::class,'index'])->name('chat');
 Route::post('chat' ,[MessagesController::class,'store'])->name('chat');
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
