@@ -37,7 +37,7 @@ Route::get('notifications',[AdminNotificationController::class,'index'])->name('
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth' ,'verified'])->name('dashboard');
+})->middleware(['auth:admin' ,'verified'])->name('dashboard');
 // Route::get('/', function () {
 //     return view('layout.admin.master-layout');
 // });
