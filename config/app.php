@@ -177,6 +177,8 @@ return [
         App\Providers\CartServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+        Kreait\Laravel\Firebase\ServiceProvider::class,
+
 
     ],
 
